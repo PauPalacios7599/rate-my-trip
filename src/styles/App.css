@@ -1,0 +1,186 @@
+@import './variables.css';
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+}
+
+/* HEADER + NAV */
+header {
+  background-color: var(--color-primary);
+  padding: var(--spacing-sm);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  text-align: center;
+}
+
+nav a {
+  color: var(--color-light);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--color-secondary);
+}
+
+nav a.active {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+}
+
+/* MAIN CONTENT */
+main {
+  flex: 1;
+  padding: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* SECTIONS */
+section {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* TRIP CARD GRID (para inicio y favoritos) */
+.trip-grid {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .trip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .trip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* FORMULARIO */
+.trip-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.trip-form input {
+  padding: var(--spacing-sm);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: var(--color-light);
+  color: var(--color-text);
+}
+
+.trip-form button {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  padding: var(--spacing-sm);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.trip-form button:hover {
+  background-color: var(--color-accent);
+}
+
+/* FORMULARIO CARD Y SECCIÓN */
+.form-card {
+  background-color: var(--color-light);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/* MENSAJES */
+.error-message {
+  color: red;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+/* BOTÓN TEMA */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-weight: bold;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+}
+
+/* BUSCADOR */
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto 2rem;
+  padding: var(--spacing-sm);
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  display: block;
+}
+
+/* TEMA OSCURO */
+.dark-theme {
+  --color-bg: #1e1e2f;
+  --color-text: #ffffff;
+  --color-light: #2d2d44;
+}
