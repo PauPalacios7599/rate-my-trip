@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import CreateTrip from './pages/CreateTrip'
 import Favorites from './pages/Favorites'
 
+import { useTheme } from './context/ThemeContext'
 import './styles/App.css'
 
 function App() {
@@ -20,21 +21,13 @@ function App() {
     return saved ? JSON.parse(saved) : initialState
   })
 
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('darkMode')
-    return savedTheme === 'true'
-  })
-
-  const toggleTheme = () => {
-    setDarkMode((prev) => !prev)
-  }
+  const { darkMode, toggleTheme } = useTheme()
 
   useEffect(() => {
     document.documentElement.setAttribute(
       'data-theme',
       darkMode ? 'dark' : 'light'
     )
-    localStorage.setItem('darkMode', darkMode)
   }, [darkMode])
 
   useEffect(() => {

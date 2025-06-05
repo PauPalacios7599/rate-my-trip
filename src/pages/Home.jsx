@@ -10,8 +10,11 @@ function Home({ trips, onToggleFavorite, onRate }) {
       .includes(search.toLowerCase())
   )
 
+  const noTripsCreated = trips.length === 0
+  const noResultsFound = trips.length > 0 && filteredTrips.length === 0
+
   return (
-    <main>
+    <section>
       <input
         type='text'
         placeholder='Buscar destino...'
@@ -20,7 +23,15 @@ function Home({ trips, onToggleFavorite, onRate }) {
         className='search-input'
       />
 
-      {filteredTrips.length > 0 ? (
+      {noTripsCreated ? (
+        <div className='no-results'>
+          <p>No hay destinos disponibles. ¡Empieza por crear uno!</p>
+        </div>
+      ) : noResultsFound ? (
+        <div className='no-results'>
+          <p>No se encontraron destinos.</p>
+        </div>
+      ) : (
         <section>
           {filteredTrips.map((trip) => (
             <TripCard
@@ -31,12 +42,8 @@ function Home({ trips, onToggleFavorite, onRate }) {
             />
           ))}
         </section>
-      ) : (
-        <div className='no-results'>
-          <p>No se encontraron destinos.</p>
-        </div>
       )}
-    </main>
+    </section>
   )
 }
 

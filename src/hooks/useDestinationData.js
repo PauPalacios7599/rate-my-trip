@@ -212,8 +212,20 @@ export function useDestinationData() {
     const normalized = translations[destination.trim()] || destination.trim()
 
     try {
-      const [countryRes, imageRes, weatherRes] = await Promise.all([
-        fetch(`https://restcountries.com/v3.1/name/${normalized}`),
+      const countryRes = await fetch(
+        `https://restcountries.com/v3.1/name/${normalized}`
+      )
+      const countryData = await countryRes.json()
+
+      // Validación: si no existe país o viene con mensaje de error
+      if (!countryRes.ok || !Array.isArray(countryData)) {
+        setError('El destino debe ser un país válido.')
+        return null
+      }
+
+      const country = countryData?.[0]
+
+      const [imageRes, weatherRes] = await Promise.all([
         fetch(
           `https://api.unsplash.com/search/photos?query=${destination}&client_id=${UNSPLASH_KEY}`
         ),
@@ -222,11 +234,9 @@ export function useDestinationData() {
         )
       ])
 
-      const countryData = await countryRes.json()
       const imageData = await imageRes.json()
       const weatherData = await weatherRes.json()
 
-      const country = countryData?.[0]
       const image = imageData?.results?.[0]
 
       return {
@@ -251,7 +261,6 @@ export function useDestinationData() {
       setLoading(false)
     }
   }
-
   return {
     fetchDestinationData,
     loading,
